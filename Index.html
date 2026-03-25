@@ -1,447 +1,426 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.4">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #191919}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #209a61}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #191919; min-height: 12.0px}
-    span.s1 {font-kerning: none}
-    span.s2 {font-kerning: none; color: #191919}
-    span.s3 {text-decoration: underline ; font-kerning: none}
-    span.s4 {text-decoration: underline ; font-kerning: none; color: #209a61}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inligo Networks: CPO Board-Level Plan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F3F4F6;
+            color: #1F2937;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 280px;
+            }
+        }
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(90deg, #2563EB, #F97316);
+        }
+        .network-node {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #0A192F;
+            color: white;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+        .network-line-v {
+            width: 4px;
+            height: 2rem;
+            background-color: #9CA3AF;
+            margin: 0 auto;
+        }
+        .product-layer {
+            transition: transform 0.3s ease;
+        }
+        .product-layer:hover {
+            transform: scale(1.02) translateX(10px);
+        }
+    </style>
 </head>
-<body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html lang="en"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;head&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;meta charset="UTF-8"&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;title&gt;Inligo Networks: CPO Board-Level Plan&lt;/title&gt;</span></p>
-<p class="p2"><span class="s2">    &lt;script src="</span><span class="s3">https://cdn.tailwindcss.com"&gt;&lt;/script</span><span class="s2">&gt;</span></p>
-<p class="p2"><span class="s2">    &lt;script src="<a href="https://cdn.jsdelivr.net/npm/chart.js%22%3E%3C/script"><span class="s4">https://cdn.jsdelivr.net/npm/chart.js"&gt;&lt;/script</span></a>&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;style&gt;</span></p>
-<p class="p2"><span class="s2">        @import url('<a href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&amp;display=swap"><span class="s4">https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&amp;display=swap</span></a>');</span></p>
-<p class="p1"><span class="s1">        body {</span></p>
-<p class="p1"><span class="s1">            font-family: 'Inter', sans-serif;</span></p>
-<p class="p1"><span class="s1">            background-color: #F3F4F6;</span></p>
-<p class="p1"><span class="s1">            color: #1F2937;</span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p1"><span class="s1">        .chart-container {</span></p>
-<p class="p1"><span class="s1">            position: relative;</span></p>
-<p class="p1"><span class="s1">            width: 100%;</span></p>
-<p class="p1"><span class="s1">            max-width: 700px;</span></p>
-<p class="p1"><span class="s1">            margin-left: auto;</span></p>
-<p class="p1"><span class="s1">            margin-right: auto;</span></p>
-<p class="p1"><span class="s1">            height: 350px;</span></p>
-<p class="p1"><span class="s1">            max-height: 400px;</span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p1"><span class="s1">        @media (max-width: 768px) {</span></p>
-<p class="p1"><span class="s1">            .chart-container {</span></p>
-<p class="p1"><span class="s1">                height: 280px;</span></p>
-<p class="p1"><span class="s1">            }</span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p1"><span class="s1">        .gradient-text {</span></p>
-<p class="p1"><span class="s1">            background-clip: text;</span></p>
-<p class="p1"><span class="s1">            -webkit-background-clip: text;</span></p>
-<p class="p1"><span class="s1">            -webkit-text-fill-color: transparent;</span></p>
-<p class="p1"><span class="s1">            background-image: linear-gradient(90deg, #2563EB, #F97316);</span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p1"><span class="s1">        .network-node {</span></p>
-<p class="p1"><span class="s1">            display: flex;</span></p>
-<p class="p1"><span class="s1">            align-items: center;</span></p>
-<p class="p1"><span class="s1">            justify-content: center;</span></p>
-<p class="p1"><span class="s1">            width: 100%;</span></p>
-<p class="p1"><span class="s1">            padding: 0.75rem;</span></p>
-<p class="p1"><span class="s1">            background-color: #0A192F;</span></p>
-<p class="p1"><span class="s1">            color: white;</span></p>
-<p class="p1"><span class="s1">            font-weight: 600;</span></p>
-<p class="p1"><span class="s1">            border-radius: 0.5rem;</span></p>
-<p class="p1"><span class="s1">            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);</span></p>
-<p class="p1"><span class="s1">            position: relative;</span></p>
-<p class="p1"><span class="s1">            z-index: 10;</span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p1"><span class="s1">        .network-line-v {</span></p>
-<p class="p1"><span class="s1">            width: 4px;</span></p>
-<p class="p1"><span class="s1">            height: 2rem;</span></p>
-<p class="p1"><span class="s1">            background-color: #9CA3AF;</span></p>
-<p class="p1"><span class="s1">            margin: 0 auto;</span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p1"><span class="s1">        .product-layer {</span></p>
-<p class="p1"><span class="s1">            transition: transform 0.3s ease;</span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p1"><span class="s1">        .product-layer:hover {</span></p>
-<p class="p1"><span class="s1">            transform: scale(1.02) translateX(10px);</span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p1"><span class="s1">    &lt;/style&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
-<p class="p1"><span class="s1">&lt;body class="antialiased"&gt;</span></p>
-<p class="p3"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    &lt;nav class="bg-[#0A192F] text-white p-4 shadow-md sticky top-0 z-50"&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;div class="max-w-7xl mx-auto flex justify-between items-center"&gt;</span></p>
-<p class="p1"><span class="s1">            &lt;div class="text-2xl font-bold tracking-tighter"&gt;INLIGO&lt;span class="text-[#F97316]"&gt;NETWORKS&lt;/span&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">            &lt;div class="text-sm font-medium uppercase tracking-wider text-gray-300"&gt;Strategic Product Vision&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;/nav&gt;</span></p>
-<p class="p3"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    &lt;header class="max-w-7xl mx-auto px-4 py-16 sm:py-24 text-center"&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#0A192F] mb-6"&gt;</span></p>
-<p class="p1"><span class="s1">            Monetizing Resilience: &lt;br/&gt;</span></p>
-<p class="p1"><span class="s1">            &lt;span class="gradient-text"&gt;The CPO 100-Day Plan&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;/h1&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;p class="mt-4 max-w-2xl mx-auto text-xl text-gray-600"&gt;</span></p>
-<p class="p1"><span class="s1">            A strategic framework for the Chief Product Officer role, designed to maximize the commercial yield of the ACCC-1 and UNITE network assets through targeted product development and disruptive market positioning.</span></p>
-<p class="p1"><span class="s1">        &lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;/header&gt;</span></p>
-<p class="p3"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    &lt;main class="max-w-7xl mx-auto px-4 pb-24 space-y-16"&gt;</span></p>
-<p class="p3"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        &lt;section class="bg-white rounded-2xl shadow-lg p-6 sm:p-10 border-t-4 border-[#2563EB]"&gt;</span></p>
-<p class="p1"><span class="s1">            &lt;h2 class="text-3xl font-bold text-[#0A192F] mb-4"&gt;1. Strategic Infrastructure Overview&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1">            &lt;p class="text-gray-600 mb-10 text-lg leading-relaxed"&gt;</span></p>
-<p class="p1"><span class="s1">                Our core competitive advantage lies in the physical routing of our assets. The ACCC-1 subsea cable provides a highly sought-after alternative to traditional Trans-Pacific routes by entirely bypassing the South China Sea, mitigating immense geopolitical risk. The integration with the UNITE terrestrial network at the Darwin nexus creates a seamless, low-latency corridor from North America and Asia directly into Australia's primary economic hubs.</span></p>
-<p class="p1"><span class="s1">            &lt;/p&gt;</span></p>
-<p class="p3"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">            &lt;div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start"&gt;</span></p>
-<p class="p1"><span class="s1">                &lt;div&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;h3 class="text-xl font-semibold text-[#0A192F] mb-6 flex items-center"&gt;</span></p>
-<p class="p1"><span class="s1">                        &lt;span class="inline-block w-8 h-8 rounded-full bg-[#2563EB] text-white flex items-center justify-center mr-3"&gt;A&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1">                        Route Topology &amp; Integration</span></p>
-<p class="p1"><span class="s1">                    &lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1">                   <span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1">                    &lt;div class="bg-gray-50 p-6 rounded-xl border border-gray-200"&gt;</span></p>
-<p class="p1"><span class="s1">                        &lt;div class="flex flex-col items-center w-full max-w-sm mx-auto"&gt;</span></p>
-<p class="p1"><span class="s1">                            &lt;div class="network-node bg-[#2563EB]"&gt;Los Angeles, USA&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                            &lt;div class="network-line-v"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                            &lt;div class="network-node bg-[#3B82F6]"&gt;Guam&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                            &lt;div class="network-line-v"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                            &lt;div class="network-node bg-[#60A5FA]"&gt;Japan&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                            &lt;div class="network-line-v"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                            &lt;div class="network-node bg-[#F97316] text-white font-bold text-lg ring-4 ring-[#F97316] ring-opacity-50"&gt;Darwin, AUS (The Nexus)&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                           <span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1">                            &lt;div class="flex w-full mt-4 gap-4"&gt;</span></p>
-<p class="p1"><span class="s1">                                &lt;div class="flex-1 flex flex-col"&gt;</span></p>
-<p class="p1"><span class="s1">                                    &lt;div class="text-center font-bold text-sm mb-2 text-[#2563EB]"&gt;ACCC-1 Continuation&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                                    &lt;div class="network-node bg-[#0A192F]"&gt;Timor Leste&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                                    &lt;div class="network-line-v"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                                    &lt;div class="network-node bg-[#0A192F]"&gt;Indonesia&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                                    &lt;div class="network-line-v"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                                    &lt;div class="network-node bg-[#0A192F]"&gt;Singapore&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                                &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                               <span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1">                                &lt;div class="flex-1 flex flex-col"&gt;</span></p>
-<p class="p1"><span class="s1">                                    &lt;div class="text-center font-bold text-sm mb-2 text-[#F97316]"&gt;UNITE Terrestrial&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                                    &lt;div class="network-node bg-[#9A3412]"&gt;Adelaide&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                                    &lt;div class="network-line-v"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                                    &lt;div class="network-node bg-[#9A3412]"&gt;Melbourne&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                                    &lt;div class="network-line-v"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                                    &lt;div class="network-node bg-[#9A3412]"&gt;Sydney&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                                &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                            &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                        &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                &lt;/div&gt;</span></p>
-<p class="p3"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">                &lt;div class="flex flex-col h-full"&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;h3 class="text-xl font-semibold text-[#0A192F] mb-6 flex items-center"&gt;</span></p>
-<p class="p1"><span class="s1">                        &lt;span class="inline-block w-8 h-8 rounded-full bg-[#F97316] text-white flex items-center justify-center mr-3"&gt;B&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1">                        Competitive Differentiation</span></p>
-<p class="p1"><span class="s1">                    &lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;p class="text-sm text-gray-500 mb-4"&gt;</span></p>
-<p class="p1"><span class="s1">                        Visualizing Inligo's value proposition against legacy routing options. Our strategic pathing yields maximum scores in geopolitical security and route diversity, two critical metrics for hyperscale and government clients.</span></p>
-<p class="p1"><span class="s1">                    &lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;div class="bg-gray-50 p-6 rounded-xl border border-gray-200 flex-grow flex items-center justify-center"&gt;</span></p>
-<p class="p1"><span class="s1">                        &lt;div class="chart-container"&gt;</span></p>
-<p class="p1"><span class="s1">                            &lt;canvas id="radarChart"&gt;&lt;/canvas&gt;</span></p>
-<p class="p1"><span class="s1">                        &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">            &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;/section&gt;</span></p>
-<p class="p3"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        &lt;section class="bg-white rounded-2xl shadow-lg p-6 sm:p-10 border-t-4 border-[#F97316]"&gt;</span></p>
-<p class="p1"><span class="s1">            &lt;h2 class="text-3xl font-bold text-[#0A192F] mb-4"&gt;2. Product Stack Development&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1">            &lt;p class="text-gray-600 mb-10 text-lg leading-relaxed"&gt;</span></p>
-<p class="p1"><span class="s1">                As Chief Product Officer, my immediate mandate is to define a tiered product taxonomy that allows Inligo to capture value at every level of the OSI model. We will not just sell "pipes"; we will sell intelligent, secure, and highly flexible connectivity solutions. The transition from raw infrastructure to managed services ensures higher margin capture and stronger customer stickiness.</span></p>
-<p class="p1"><span class="s1">            &lt;/p&gt;</span></p>
-<p class="p3"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">            &lt;div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"&gt;</span></p>
-<p class="p1"><span class="s1">                &lt;div class="space-y-4"&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;div class="product-layer bg-[#0A192F] text-white p-6 rounded-lg shadow-md border-l-8 border-[#2563EB]"&gt;</span></p>
-<p class="p1"><span class="s1">                        &lt;h4 class="text-xl font-bold mb-1"&gt;Layer 1: Foundation&lt;/h4&gt;</span></p>
-<p class="p1"><span class="s1">                        &lt;p class="text-sm text-gray-300"&gt;Dark Fiber pairs and Spectrum allocation. Targeting hyperscalers requiring absolute physical control.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;div class="product-layer bg-[#1E3A8A] text-white p-6 rounded-lg shadow-md border-l-8 border-[#3B82F6]"&gt;</span></p>
-<p class="p1"><span class="s1">                        &lt;h4 class="text-xl font-bold mb-1"&gt;Layer 2: Wavelengths&lt;/h4&gt;</span></p>
-<p class="p1"><span class="s1">                        &lt;p class="text-sm text-gray-300"&gt;100G, 400G, and 800G protected and unprotected alien wavelengths. High-capacity transport for Tier 1 ISPs.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;div class="product-layer bg-[#F97316] text-white p-6 rounded-lg shadow-md border-l-8 border-[#EA580C]"&gt;</span></p>
-<p class="p1"><span class="s1">                        &lt;h4 class="text-xl font-bold mb-1"&gt;Layer 3: Managed Data&lt;/h4&gt;</span></p>
-<p class="p1"><span class="s1">                        &lt;p class="text-sm text-gray-100"&gt;Carrier Ethernet, IP Transit, and direct Cloud On-ramps. Flexible, SLA-backed services for enterprise clients.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;div class="product-layer bg-[#FFF7ED] text-[#0A192F] p-6 rounded-lg shadow-md border-l-8 border-[#FDBA74]"&gt;</span></p>
-<p class="p1"><span class="s1">                        &lt;h4 class="text-xl font-bold mb-1"&gt;Layer 4: Intelligent Resilience&lt;/h4&gt;</span></p>
-<p class="p1"><span class="s1">                        &lt;p class="text-sm text-gray-600"&gt;Automated route failover, SD-WAN integration, and quantum-safe encryption overlays (Future Roadmap).&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                &lt;/div&gt;</span></p>
-<p class="p3"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">                &lt;div class="bg-gray-50 p-8 rounded-xl border border-gray-200 h-full flex flex-col justify-center"&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;h3 class="text-2xl font-bold text-[#0A192F] mb-4"&gt;Value Creation Strategy&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;ul class="space-y-6"&gt;</span></p>
-<p class="p1"><span class="s1">                        &lt;li class="flex items-start"&gt;</span></p>
-<p class="p1"><span class="s1">                            &lt;span class="text-3xl mr-4"&gt;&amp;#10003;&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1">                            &lt;div&gt;</span></p>
-<p class="p1"><span class="s1">                                &lt;strong class="block text-lg text-[#2563EB]"&gt;Day 0-30: Product Definition&lt;/strong&gt;</span></p>
-<p class="p1"><span class="s1">                                &lt;span class="text-gray-600 text-sm"&gt;Finalize technical specifications, SLAs, and commercial packaging for L1/L2 services.&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1">                            &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                        &lt;/li&gt;</span></p>
-<p class="p1"><span class="s1">                        &lt;li class="flex items-start"&gt;</span></p>
-<p class="p1"><span class="s1">                            &lt;span class="text-3xl mr-4"&gt;&amp;#10003;&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1">                            &lt;div&gt;</span></p>
-<p class="p1"><span class="s1">                                &lt;strong class="block text-lg text-[#2563EB]"&gt;Day 31-60: Go-to-Market Enablement&lt;/strong&gt;</span></p>
-<p class="p1"><span class="s1">                                &lt;span class="text-gray-600 text-sm"&gt;Develop pricing calculators, sales collateral, and initiate presales engagements based on route exclusivity.&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1">                            &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                        &lt;/li&gt;</span></p>
-<p class="p1"><span class="s1">                        &lt;li class="flex items-start"&gt;</span></p>
-<p class="p1"><span class="s1">                            &lt;span class="text-3xl mr-4"&gt;&amp;#10003;&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1">                            &lt;div&gt;</span></p>
-<p class="p1"><span class="s1">                                &lt;strong class="block text-lg text-[#2563EB]"&gt;Day 61-100: Ecosystem Partnerships&lt;/strong&gt;</span></p>
-<p class="p1"><span class="s1">                                &lt;span class="text-gray-600 text-sm"&gt;Establish critical cloud on-ramps in Darwin and Singapore to drive enterprise demand for L3 services.&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1">                            &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                        &lt;/li&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;/ul&gt;</span></p>
-<p class="p1"><span class="s1">                &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">            &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;/section&gt;</span></p>
-<p class="p3"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        &lt;section class="bg-white rounded-2xl shadow-lg p-6 sm:p-10 border-t-4 border-[#0A192F]"&gt;</span></p>
-<p class="p1"><span class="s1">            &lt;h2 class="text-3xl font-bold text-[#0A192F] mb-4"&gt;3. Target Market &amp; Revenue Trajectory&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1">            &lt;p class="text-gray-600 mb-10 text-lg leading-relaxed"&gt;</span></p>
-<p class="p1"><span class="s1">                By bypassing congested and contested waterways, Inligo commands a premium. Our primary targets are entities where data sovereignty, latency, and absolute route diversity are non-negotiable. The product suite is designed to accommodate the massive volume demands of hyperscalers while maintaining high-margin service options for enterprise and government sectors.</span></p>
-<p class="p1"><span class="s1">            &lt;/p&gt;</span></p>
-<p class="p3"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">            &lt;div class="grid grid-cols-1 lg:grid-cols-2 gap-12"&gt;</span></p>
-<p class="p1"><span class="s1">                &lt;div&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;h3 class="text-xl font-semibold text-[#0A192F] mb-6 text-center"&gt;Initial Target Revenue Composition&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;p class="text-sm text-gray-500 mb-4 text-center"&gt;</span></p>
-<p class="p1"><span class="s1">                        Breakdown of anticipated early-stage capacity uptake by customer segment. Hyperscalers anchor the network, while government and enterprise provide margin expansion.</span></p>
-<p class="p1"><span class="s1">                    &lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;div class="chart-container"&gt;</span></p>
-<p class="p1"><span class="s1">                        &lt;canvas id="doughnutChart"&gt;&lt;/canvas&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                &lt;/div&gt;</span></p>
-<p class="p3"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">                &lt;div&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;h3 class="text-xl font-semibold text-[#0A192F] mb-6 text-center"&gt;5-Year Growth &amp; Capacity Projection&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;p class="text-sm text-gray-500 mb-4 text-center"&gt;</span></p>
-<p class="p1"><span class="s1">                        Forecasted progression of lit capacity against cumulative revenue generation as the ACCC-1 and UNITE networks move from launch into full maturity.</span></p>
-<p class="p1"><span class="s1">                    &lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;div class="chart-container"&gt;</span></p>
-<p class="p1"><span class="s1">                        &lt;canvas id="comboChart"&gt;&lt;/canvas&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">            &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;/section&gt;</span></p>
-<p class="p3"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    &lt;/main&gt;</span></p>
-<p class="p3"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    &lt;footer class="bg-[#0A192F] text-white py-12 text-center"&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;div class="max-w-4xl mx-auto px-4"&gt;</span></p>
-<p class="p1"><span class="s1">            &lt;h2 class="text-2xl font-bold mb-4"&gt;Next Steps: Hitting the Ground Running&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1">            &lt;p class="text-gray-400 mb-8"&gt;</span></p>
-<p class="p1"><span class="s1">                The role of Chief Product Officer at Inligo is about translating unparalleled physical infrastructure into compelling, scalable commercial products. I look forward to leading this charge.</span></p>
-<p class="p1"><span class="s1">            &lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">            &lt;div class="inline-block border border-gray-600 rounded-lg px-6 py-3 text-sm tracking-wide text-gray-300"&gt;</span></p>
-<p class="p1"><span class="s1">                Prepared for Inligo Networks Executive Briefing</span></p>
-<p class="p1"><span class="s1">            &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;/footer&gt;</span></p>
-<p class="p3"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    &lt;script&gt;</span></p>
-<p class="p1"><span class="s1">        function wrapLabel(label, maxLength = 16) {</span></p>
-<p class="p1"><span class="s1">            if (label.length &lt;= maxLength) return label;</span></p>
-<p class="p1"><span class="s1">            const words = label.split(' ');</span></p>
-<p class="p1"><span class="s1">            const lines = [];</span></p>
-<p class="p1"><span class="s1">            let currentLine = '';</span></p>
-<p class="p1"><span class="s1">            words.forEach(word =&gt; {</span></p>
-<p class="p1"><span class="s1">                if ((currentLine + word).length &gt; maxLength) {</span></p>
-<p class="p1"><span class="s1">                    if (currentLine.length &gt; 0) lines.push(currentLine.trim());</span></p>
-<p class="p1"><span class="s1">                    currentLine = word + ' ';</span></p>
-<p class="p1"><span class="s1">                } else {</span></p>
-<p class="p1"><span class="s1">                    currentLine += word + ' ';</span></p>
-<p class="p1"><span class="s1">                }</span></p>
-<p class="p1"><span class="s1">            });</span></p>
-<p class="p1"><span class="s1">            if (currentLine.length &gt; 0) lines.push(currentLine.trim());</span></p>
-<p class="p1"><span class="s1">            return lines;</span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p3"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        const tooltipConfig = {</span></p>
-<p class="p1"><span class="s1">            callbacks: {</span></p>
-<p class="p1"><span class="s1">                title: function(tooltipItems) {</span></p>
-<p class="p1"><span class="s1">                    const item = tooltipItems[0];</span></p>
-<p class="p1"><span class="s1">                    let label = item.chart.data.labels[item.dataIndex];</span></p>
-<p class="p1"><span class="s1">                    if (Array.isArray(label)) {</span></p>
-<p class="p1"><span class="s1">                        return label.join(' ');</span></p>
-<p class="p1"><span class="s1">                    } else {</span></p>
-<p class="p1"><span class="s1">                        return label;</span></p>
-<p class="p1"><span class="s1">                    }</span></p>
-<p class="p1"><span class="s1">                }</span></p>
-<p class="p1"><span class="s1">            }</span></p>
-<p class="p1"><span class="s1">        };</span></p>
-<p class="p3"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        const rawRadarLabels = ['Route Diversity &amp; Resilience', 'South China Sea Avoidance', 'End-to-End Latency Profile', 'Scalable Capacity', 'Direct Market Integration'];</span></p>
-<p class="p1"><span class="s1">        const radarLabels = rawRadarLabels.map(label =&gt; wrapLabel(label));</span></p>
-<p class="p3"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        const ctxRadar = document.getElementById('radarChart').getContext('2d');</span></p>
-<p class="p1"><span class="s1">        new Chart(ctxRadar, {</span></p>
-<p class="p1"><span class="s1">            type: 'radar',</span></p>
-<p class="p1"><span class="s1">            data: {</span></p>
-<p class="p1"><span class="s1">                labels: radarLabels,</span></p>
-<p class="p1"><span class="s1">                datasets: [{</span></p>
-<p class="p1"><span class="s1">                    label: 'Inligo (ACCC-1/UNITE)',</span></p>
-<p class="p1"><span class="s1">                    data: [95, 100, 90, 95, 85],</span></p>
-<p class="p1"><span class="s1">                    fill: true,</span></p>
-<p class="p1"><span class="s1">                    backgroundColor: 'rgba(37, 99, 235, 0.2)',</span></p>
-<p class="p1"><span class="s1">                    borderColor: 'rgba(37, 99, 235, 1)',</span></p>
-<p class="p1"><span class="s1">                    pointBackgroundColor: 'rgba(37, 99, 235, 1)',</span></p>
-<p class="p1"><span class="s1">                    pointBorderColor: '#fff',</span></p>
-<p class="p1"><span class="s1">                    pointHoverBackgroundColor: '#fff',</span></p>
-<p class="p1"><span class="s1">                    pointHoverBorderColor: 'rgba(37, 99, 235, 1)'</span></p>
-<p class="p1"><span class="s1">                }, {</span></p>
-<p class="p1"><span class="s1">                    label: 'Traditional Routes',</span></p>
-<p class="p1"><span class="s1">                    data: [40, 10, 85, 90, 80],</span></p>
-<p class="p1"><span class="s1">                    fill: true,</span></p>
-<p class="p1"><span class="s1">                    backgroundColor: 'rgba(249, 115, 22, 0.2)',</span></p>
-<p class="p1"><span class="s1">                    borderColor: 'rgba(249, 115, 22, 1)',</span></p>
-<p class="p1"><span class="s1">                    pointBackgroundColor: 'rgba(249, 115, 22, 1)',</span></p>
-<p class="p1"><span class="s1">                    pointBorderColor: '#fff',</span></p>
-<p class="p1"><span class="s1">                    pointHoverBackgroundColor: '#fff',</span></p>
-<p class="p1"><span class="s1">                    pointHoverBorderColor: 'rgba(249, 115, 22, 1)'</span></p>
-<p class="p1"><span class="s1">                }]</span></p>
-<p class="p1"><span class="s1">            },</span></p>
-<p class="p1"><span class="s1">            options: {</span></p>
-<p class="p1"><span class="s1">                maintainAspectRatio: false,</span></p>
-<p class="p1"><span class="s1">                scales: {</span></p>
-<p class="p1"><span class="s1">                    r: {</span></p>
-<p class="p1"><span class="s1">                        angleLines: { color: 'rgba(0, 0, 0, 0.1)' },</span></p>
-<p class="p1"><span class="s1">                        grid: { color: 'rgba(0, 0, 0, 0.1)' },</span></p>
-<p class="p1"><span class="s1">                        pointLabels: {</span></p>
-<p class="p1"><span class="s1">                            font: { family: 'Inter', size: 11, weight: '600' },</span></p>
-<p class="p1"><span class="s1">                            color: '#374151'</span></p>
-<p class="p1"><span class="s1">                        },</span></p>
-<p class="p1"><span class="s1">                        ticks: { display: false, min: 0, max: 100 }</span></p>
-<p class="p1"><span class="s1">                    }</span></p>
-<p class="p1"><span class="s1">                },</span></p>
-<p class="p1"><span class="s1">                plugins: {</span></p>
-<p class="p1"><span class="s1">                    legend: { position: 'bottom', labels: { font: { family: 'Inter' } } },</span></p>
-<p class="p1"><span class="s1">                    tooltip: tooltipConfig</span></p>
-<p class="p1"><span class="s1">                }</span></p>
-<p class="p1"><span class="s1">            }</span></p>
-<p class="p1"><span class="s1">        });</span></p>
-<p class="p3"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        const rawDoughnutLabels = ['Hyperscalers (Content &amp; Cloud)', 'Global Telecommunications', 'Government &amp; Defense', 'Enterprise Financials'];</span></p>
-<p class="p1"><span class="s1">        const doughnutLabels = rawDoughnutLabels.map(label =&gt; wrapLabel(label));</span></p>
-<p class="p3"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        const ctxDoughnut = document.getElementById('doughnutChart').getContext('2d');</span></p>
-<p class="p1"><span class="s1">        new Chart(ctxDoughnut, {</span></p>
-<p class="p1"><span class="s1">            type: 'doughnut',</span></p>
-<p class="p1"><span class="s1">            data: {</span></p>
-<p class="p1"><span class="s1">                labels: doughnutLabels,</span></p>
-<p class="p1"><span class="s1">                datasets: [{</span></p>
-<p class="p1"><span class="s1">                    data: [45, 25, 20, 10],</span></p>
-<p class="p1"><span class="s1">                    backgroundColor: ['#0A192F', '#2563EB', '#F97316', '#60A5FA'],</span></p>
-<p class="p1"><span class="s1">                    borderWidth: 2,</span></p>
-<p class="p1"><span class="s1">                    borderColor: '#ffffff',</span></p>
-<p class="p1"><span class="s1">                    hoverOffset: 4</span></p>
-<p class="p1"><span class="s1">                }]</span></p>
-<p class="p1"><span class="s1">            },</span></p>
-<p class="p1"><span class="s1">            options: {</span></p>
-<p class="p1"><span class="s1">                maintainAspectRatio: false,</span></p>
-<p class="p1"><span class="s1">                cutout: '65%',</span></p>
-<p class="p1"><span class="s1">                plugins: {</span></p>
-<p class="p1"><span class="s1">                    legend: { position: 'right', labels: { font: { family: 'Inter' }, padding: 20 } },</span></p>
-<p class="p1"><span class="s1">                    tooltip: tooltipConfig</span></p>
-<p class="p1"><span class="s1">                }</span></p>
-<p class="p1"><span class="s1">            }</span></p>
-<p class="p1"><span class="s1">        });</span></p>
-<p class="p3"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        const rawComboLabels = ['Year 1 (Launch)', 'Year 2 (Expansion)', 'Year 3 (Growth)', 'Year 4 (Scale)', 'Year 5 (Maturity)'];</span></p>
-<p class="p1"><span class="s1">        const comboLabels = rawComboLabels.map(label =&gt; wrapLabel(label));</span></p>
-<p class="p3"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        const ctxCombo = document.getElementById('comboChart').getContext('2d');</span></p>
-<p class="p1"><span class="s1">        new Chart(ctxCombo, {</span></p>
-<p class="p1"><span class="s1">            type: 'bar',</span></p>
-<p class="p1"><span class="s1">            data: {</span></p>
-<p class="p1"><span class="s1">                labels: comboLabels,</span></p>
-<p class="p1"><span class="s1">                datasets: [{</span></p>
-<p class="p1"><span class="s1">                    type: 'line',</span></p>
-<p class="p1"><span class="s1">                    label: 'Cumulative Revenue Index',</span></p>
-<p class="p1"><span class="s1">                    data: [20, 45, 75, 110, 150],</span></p>
-<p class="p1"><span class="s1">                    borderColor: '#F97316',</span></p>
-<p class="p1"><span class="s1">                    backgroundColor: '#F97316',</span></p>
-<p class="p1"><span class="s1">                    borderWidth: 3,</span></p>
-<p class="p1"><span class="s1">                    tension: 0.4,</span></p>
-<p class="p1"><span class="s1">                    yAxisID: 'y1'</span></p>
-<p class="p1"><span class="s1">                }, {</span></p>
-<p class="p1"><span class="s1">                    type: 'bar',</span></p>
-<p class="p1"><span class="s1">                    label: 'Lit Capacity Sold (Tbps)',</span></p>
-<p class="p1"><span class="s1">                    data: [15, 35, 60, 85, 120],</span></p>
-<p class="p1"><span class="s1">                    backgroundColor: '#2563EB',</span></p>
-<p class="p1"><span class="s1">                    borderRadius: 4,</span></p>
-<p class="p1"><span class="s1">                    yAxisID: 'y'</span></p>
-<p class="p1"><span class="s1">                }]</span></p>
-<p class="p1"><span class="s1">            },</span></p>
-<p class="p1"><span class="s1">            options: {</span></p>
-<p class="p1"><span class="s1">                maintainAspectRatio: false,</span></p>
-<p class="p1"><span class="s1">                scales: {</span></p>
-<p class="p1"><span class="s1">                    y: {</span></p>
-<p class="p1"><span class="s1">                        type: 'linear',</span></p>
-<p class="p1"><span class="s1">                        display: true,</span></p>
-<p class="p1"><span class="s1">                        position: 'left',</span></p>
-<p class="p1"><span class="s1">                        title: { display: true, text: 'Capacity (Tbps)', font: { family: 'Inter' } },</span></p>
-<p class="p1"><span class="s1">                        grid: { color: 'rgba(0, 0, 0, 0.05)' }</span></p>
-<p class="p1"><span class="s1">                    },</span></p>
-<p class="p1"><span class="s1">                    y1: {</span></p>
-<p class="p1"><span class="s1">                        type: 'linear',</span></p>
-<p class="p1"><span class="s1">                        display: true,</span></p>
-<p class="p1"><span class="s1">                        position: 'right',</span></p>
-<p class="p1"><span class="s1">                        title: { display: true, text: 'Revenue Index', font: { family: 'Inter' } },</span></p>
-<p class="p1"><span class="s1">                        grid: { drawOnChartArea: false }</span></p>
-<p class="p1"><span class="s1">                    },</span></p>
-<p class="p1"><span class="s1">                    x: {</span></p>
-<p class="p1"><span class="s1">                        grid: { display: false },</span></p>
-<p class="p1"><span class="s1">                        ticks: { font: { family: 'Inter' } }</span></p>
-<p class="p1"><span class="s1">                    }</span></p>
-<p class="p1"><span class="s1">                },</span></p>
-<p class="p1"><span class="s1">                plugins: {</span></p>
-<p class="p1"><span class="s1">                    legend: { position: 'bottom', labels: { font: { family: 'Inter' } } },</span></p>
-<p class="p1"><span class="s1">                    tooltip: tooltipConfig</span></p>
-<p class="p1"><span class="s1">                }</span></p>
-<p class="p1"><span class="s1">            }</span></p>
-<p class="p1"><span class="s1">        });</span></p>
-<p class="p1"><span class="s1">    &lt;/script&gt;</span></p>
-<p class="p3"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    &lt;!--</span></p>
-<p class="p1"><span class="s1">    PALETTE: Vibrant Tech (Deep Navy #0A192F, Bright Blue #2563EB, Vibrant Orange #F97316, Light Blue #60A5FA)</span></p>
-<p class="p1"><span class="s1">    NARRATIVE PLAN:</span></p>
-<p class="p1"><span class="s1">    - Introduction: Executive Summary framing the infographic as a CPO 100-day vision board.</span></p>
-<p class="p1"><span class="s1">    - Section 1: Strategic Infrastructure. Highlights the physical assets (ACCC-1 &amp; UNITE), focusing on the critical South China Sea avoidance and Darwin nexus.</span></p>
-<p class="p1"><span class="s1">    - Section 2: Product Stack Development. Outlines the translation of raw fiber into monetizable, layered product offerings (L1 to L4).</span></p>
-<p class="p1"><span class="s1">    - Section 3: Target Market &amp; Revenue. Defines who will buy the products and models the expected 5-year growth trajectory.</span></p>
-<p class="p1"><span class="s1">    VISUALIZATION CHOICES:</span></p>
-<p class="p1"><span class="s1">    1. Network Route Map -&gt; Goal: Organize/Flow -&gt; Method: Structured HTML/CSS Flexbox (NO SVG). Justification: Clearly illustrates physical pathing and the structural relationship between ACCC-1 and UNITE without relying on prohibited graphic types.</span></p>
-<p class="p1"><span class="s1">    2. Radar Chart -&gt; Goal: Compare -&gt; Method: Chart.js Canvas (NO SVG). Justification: Ideal for mapping multi-dimensional value propositions (Resilience, Latency, Security) to visually demonstrate dominance over traditional routes.</span></p>
-<p class="p1"><span class="s1">    3. Product Stack Diagram -&gt; Goal: Organize/Hierarchy -&gt; Method: Structured HTML/CSS Div Stack (NO SVG). Justification: Demonstrates the progressive value-add and architectural layering of the proposed product suite.</span></p>
-<p class="p1"><span class="s1">    4. Doughnut Chart -&gt; Goal: Compare/Composition -&gt; Method: Chart.js Canvas (NO SVG). Justification: Effectively displays proportional revenue targets across distinct client demographics.</span></p>
-<p class="p1"><span class="s1">    5. Combo Bar/Line Chart -&gt; Goal: Change/Trends -&gt; Method: Chart.js Canvas (NO SVG). Justification: Correlates raw capacity sales volume (Bar) with the resulting exponential revenue growth trend (Line) over a timeline.</span></p>
-<p class="p1"><span class="s1">    CONFIRMATION: I explicitly confirm that NEITHER Mermaid JS NOR SVG were used anywhere in the output within the HTML comments and the entire document.</span></p>
-<p class="p1"><span class="s1">    --&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+<body class="antialiased">
+
+    <nav class="bg-[#0A192F] text-white p-4 shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold tracking-tighter">INLIGO<span class="text-[#F97316]">NETWORKS</span></div>
+            <div class="text-sm font-medium uppercase tracking-wider text-gray-300">Strategic Product Vision</div>
+        </div>
+    </nav>
+
+    <header class="max-w-7xl mx-auto px-4 py-16 sm:py-24 text-center">
+        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#0A192F] mb-6">
+            Monetizing Resilience: <br/>
+            <span class="gradient-text">The CPO 100-Day Plan</span>
+        </h1>
+        <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-600">
+            A strategic framework for the Chief Product Officer role, designed to maximize the commercial yield of the ACCC-1 and UNITE network assets through targeted product development and disruptive market positioning.
+        </p>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 pb-24 space-y-16">
+
+        <section class="bg-white rounded-2xl shadow-lg p-6 sm:p-10 border-t-4 border-[#2563EB]">
+            <h2 class="text-3xl font-bold text-[#0A192F] mb-4">1. Strategic Infrastructure Overview</h2>
+            <p class="text-gray-600 mb-10 text-lg leading-relaxed">
+                Our core competitive advantage lies in the physical routing of our assets. The ACCC-1 subsea cable provides a highly sought-after alternative to traditional Trans-Pacific routes by entirely bypassing the South China Sea, mitigating immense geopolitical risk. The integration with the UNITE terrestrial network at the Darwin nexus creates a seamless, low-latency corridor from North America and Asia directly into Australia's primary economic hubs.
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <div>
+                    <h3 class="text-xl font-semibold text-[#0A192F] mb-6 flex items-center">
+                        <span class="inline-block w-8 h-8 rounded-full bg-[#2563EB] text-white flex items-center justify-center mr-3">A</span>
+                        Route Topology & Integration
+                    </h3>
+                    
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <div class="flex flex-col items-center w-full max-w-sm mx-auto">
+                            <div class="network-node bg-[#2563EB]">Los Angeles, USA</div>
+                            <div class="network-line-v"></div>
+                            <div class="network-node bg-[#3B82F6]">Guam</div>
+                            <div class="network-line-v"></div>
+                            <div class="network-node bg-[#60A5FA]">Japan</div>
+                            <div class="network-line-v"></div>
+                            <div class="network-node bg-[#F97316] text-white font-bold text-lg ring-4 ring-[#F97316] ring-opacity-50">Darwin, AUS (The Nexus)</div>
+                            
+                            <div class="flex w-full mt-4 gap-4">
+                                <div class="flex-1 flex flex-col">
+                                    <div class="text-center font-bold text-sm mb-2 text-[#2563EB]">ACCC-1 Continuation</div>
+                                    <div class="network-node bg-[#0A192F]">Timor Leste</div>
+                                    <div class="network-line-v"></div>
+                                    <div class="network-node bg-[#0A192F]">Indonesia</div>
+                                    <div class="network-line-v"></div>
+                                    <div class="network-node bg-[#0A192F]">Singapore</div>
+                                </div>
+                                
+                                <div class="flex-1 flex flex-col">
+                                    <div class="text-center font-bold text-sm mb-2 text-[#F97316]">UNITE Terrestrial</div>
+                                    <div class="network-node bg-[#9A3412]">Adelaide</div>
+                                    <div class="network-line-v"></div>
+                                    <div class="network-node bg-[#9A3412]">Melbourne</div>
+                                    <div class="network-line-v"></div>
+                                    <div class="network-node bg-[#9A3412]">Sydney</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col h-full">
+                    <h3 class="text-xl font-semibold text-[#0A192F] mb-6 flex items-center">
+                        <span class="inline-block w-8 h-8 rounded-full bg-[#F97316] text-white flex items-center justify-center mr-3">B</span>
+                        Competitive Differentiation
+                    </h3>
+                    <p class="text-sm text-gray-500 mb-4">
+                        Visualizing Inligo's value proposition against legacy routing options. Our strategic pathing yields maximum scores in geopolitical security and route diversity, two critical metrics for hyperscale and government clients.
+                    </p>
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 flex-grow flex items-center justify-center">
+                        <div class="chart-container">
+                            <canvas id="radarChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow-lg p-6 sm:p-10 border-t-4 border-[#F97316]">
+            <h2 class="text-3xl font-bold text-[#0A192F] mb-4">2. Product Stack Development</h2>
+            <p class="text-gray-600 mb-10 text-lg leading-relaxed">
+                As Chief Product Officer, my immediate mandate is to define a tiered product taxonomy that allows Inligo to capture value at every level of the OSI model. We will not just sell "pipes"; we will sell intelligent, secure, and highly flexible connectivity solutions. The transition from raw infrastructure to managed services ensures higher margin capture and stronger customer stickiness.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-4">
+                    <div class="product-layer bg-[#0A192F] text-white p-6 rounded-lg shadow-md border-l-8 border-[#2563EB]">
+                        <h4 class="text-xl font-bold mb-1">Layer 1: Foundation</h4>
+                        <p class="text-sm text-gray-300">Dark Fiber pairs and Spectrum allocation. Targeting hyperscalers requiring absolute physical control.</p>
+                    </div>
+                    <div class="product-layer bg-[#1E3A8A] text-white p-6 rounded-lg shadow-md border-l-8 border-[#3B82F6]">
+                        <h4 class="text-xl font-bold mb-1">Layer 2: Wavelengths</h4>
+                        <p class="text-sm text-gray-300">100G, 400G, and 800G protected and unprotected alien wavelengths. High-capacity transport for Tier 1 ISPs.</p>
+                    </div>
+                    <div class="product-layer bg-[#F97316] text-white p-6 rounded-lg shadow-md border-l-8 border-[#EA580C]">
+                        <h4 class="text-xl font-bold mb-1">Layer 3: Managed Data</h4>
+                        <p class="text-sm text-gray-100">Carrier Ethernet, IP Transit, and direct Cloud On-ramps. Flexible, SLA-backed services for enterprise clients.</p>
+                    </div>
+                    <div class="product-layer bg-[#FFF7ED] text-[#0A192F] p-6 rounded-lg shadow-md border-l-8 border-[#FDBA74]">
+                        <h4 class="text-xl font-bold mb-1">Layer 4: Intelligent Resilience</h4>
+                        <p class="text-sm text-gray-600">Automated route failover, SD-WAN integration, and quantum-safe encryption overlays (Future Roadmap).</p>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 h-full flex flex-col justify-center">
+                    <h3 class="text-2xl font-bold text-[#0A192F] mb-4">Value Creation Strategy</h3>
+                    <ul class="space-y-6">
+                        <li class="flex items-start">
+                            <span class="text-3xl mr-4">&#10003;</span>
+                            <div>
+                                <strong class="block text-lg text-[#2563EB]">Day 0-30: Product Definition</strong>
+                                <span class="text-gray-600 text-sm">Finalize technical specifications, SLAs, and commercial packaging for L1/L2 services.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-3xl mr-4">&#10003;</span>
+                            <div>
+                                <strong class="block text-lg text-[#2563EB]">Day 31-60: Go-to-Market Enablement</strong>
+                                <span class="text-gray-600 text-sm">Develop pricing calculators, sales collateral, and initiate presales engagements based on route exclusivity.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-3xl mr-4">&#10003;</span>
+                            <div>
+                                <strong class="block text-lg text-[#2563EB]">Day 61-100: Ecosystem Partnerships</strong>
+                                <span class="text-gray-600 text-sm">Establish critical cloud on-ramps in Darwin and Singapore to drive enterprise demand for L3 services.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow-lg p-6 sm:p-10 border-t-4 border-[#0A192F]">
+            <h2 class="text-3xl font-bold text-[#0A192F] mb-4">3. Target Market & Revenue Trajectory</h2>
+            <p class="text-gray-600 mb-10 text-lg leading-relaxed">
+                By bypassing congested and contested waterways, Inligo commands a premium. Our primary targets are entities where data sovereignty, latency, and absolute route diversity are non-negotiable. The product suite is designed to accommodate the massive volume demands of hyperscalers while maintaining high-margin service options for enterprise and government sectors.
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-xl font-semibold text-[#0A192F] mb-6 text-center">Initial Target Revenue Composition</h3>
+                    <p class="text-sm text-gray-500 mb-4 text-center">
+                        Breakdown of anticipated early-stage capacity uptake by customer segment. Hyperscalers anchor the network, while government and enterprise provide margin expansion.
+                    </p>
+                    <div class="chart-container">
+                        <canvas id="doughnutChart"></canvas>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold text-[#0A192F] mb-6 text-center">5-Year Growth & Capacity Projection</h3>
+                    <p class="text-sm text-gray-500 mb-4 text-center">
+                        Forecasted progression of lit capacity against cumulative revenue generation as the ACCC-1 and UNITE networks move from launch into full maturity.
+                    </p>
+                    <div class="chart-container">
+                        <canvas id="comboChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#0A192F] text-white py-12 text-center">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-4">Next Steps: Hitting the Ground Running</h2>
+            <p class="text-gray-400 mb-8">
+                The role of Chief Product Officer at Inligo is about translating unparalleled physical infrastructure into compelling, scalable commercial products. I look forward to leading this charge.
+            </p>
+            <div class="inline-block border border-gray-600 rounded-lg px-6 py-3 text-sm tracking-wide text-gray-300">
+                Prepared for Inligo Networks Executive Briefing
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function wrapLabel(label, maxLength = 16) {
+            if (label.length <= maxLength) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > maxLength) {
+                    if (currentLine.length > 0) lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            if (currentLine.length > 0) lines.push(currentLine.trim());
+            return lines;
+        }
+
+        const tooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        const rawRadarLabels = ['Route Diversity & Resilience', 'South China Sea Avoidance', 'End-to-End Latency Profile', 'Scalable Capacity', 'Direct Market Integration'];
+        const radarLabels = rawRadarLabels.map(label => wrapLabel(label));
+
+        const ctxRadar = document.getElementById('radarChart').getContext('2d');
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: radarLabels,
+                datasets: [{
+                    label: 'Inligo (ACCC-1/UNITE)',
+                    data: [95, 100, 90, 95, 85],
+                    fill: true,
+                    backgroundColor: 'rgba(37, 99, 235, 0.2)',
+                    borderColor: 'rgba(37, 99, 235, 1)',
+                    pointBackgroundColor: 'rgba(37, 99, 235, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(37, 99, 235, 1)'
+                }, {
+                    label: 'Traditional Routes',
+                    data: [40, 10, 85, 90, 80],
+                    fill: true,
+                    backgroundColor: 'rgba(249, 115, 22, 0.2)',
+                    borderColor: 'rgba(249, 115, 22, 1)',
+                    pointBackgroundColor: 'rgba(249, 115, 22, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(249, 115, 22, 1)'
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                        grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                        pointLabels: {
+                            font: { family: 'Inter', size: 11, weight: '600' },
+                            color: '#374151'
+                        },
+                        ticks: { display: false, min: 0, max: 100 }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'bottom', labels: { font: { family: 'Inter' } } },
+                    tooltip: tooltipConfig
+                }
+            }
+        });
+
+        const rawDoughnutLabels = ['Hyperscalers (Content & Cloud)', 'Global Telecommunications', 'Government & Defense', 'Enterprise Financials'];
+        const doughnutLabels = rawDoughnutLabels.map(label => wrapLabel(label));
+
+        const ctxDoughnut = document.getElementById('doughnutChart').getContext('2d');
+        new Chart(ctxDoughnut, {
+            type: 'doughnut',
+            data: {
+                labels: doughnutLabels,
+                datasets: [{
+                    data: [45, 25, 20, 10],
+                    backgroundColor: ['#0A192F', '#2563EB', '#F97316', '#60A5FA'],
+                    borderWidth: 2,
+                    borderColor: '#ffffff',
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                cutout: '65%',
+                plugins: {
+                    legend: { position: 'right', labels: { font: { family: 'Inter' }, padding: 20 } },
+                    tooltip: tooltipConfig
+                }
+            }
+        });
+
+        const rawComboLabels = ['Year 1 (Launch)', 'Year 2 (Expansion)', 'Year 3 (Growth)', 'Year 4 (Scale)', 'Year 5 (Maturity)'];
+        const comboLabels = rawComboLabels.map(label => wrapLabel(label));
+
+        const ctxCombo = document.getElementById('comboChart').getContext('2d');
+        new Chart(ctxCombo, {
+            type: 'bar',
+            data: {
+                labels: comboLabels,
+                datasets: [{
+                    type: 'line',
+                    label: 'Cumulative Revenue Index',
+                    data: [20, 45, 75, 110, 150],
+                    borderColor: '#F97316',
+                    backgroundColor: '#F97316',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    yAxisID: 'y1'
+                }, {
+                    type: 'bar',
+                    label: 'Lit Capacity Sold (Tbps)',
+                    data: [15, 35, 60, 85, 120],
+                    backgroundColor: '#2563EB',
+                    borderRadius: 4,
+                    yAxisID: 'y'
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        title: { display: true, text: 'Capacity (Tbps)', font: { family: 'Inter' } },
+                        grid: { color: 'rgba(0, 0, 0, 0.05)' }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        title: { display: true, text: 'Revenue Index', font: { family: 'Inter' } },
+                        grid: { drawOnChartArea: false }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { font: { family: 'Inter' } }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'bottom', labels: { font: { family: 'Inter' } } },
+                    tooltip: tooltipConfig
+                }
+            }
+        });
+    </script>
+
+    <!--
+    PALETTE: Vibrant Tech (Deep Navy #0A192F, Bright Blue #2563EB, Vibrant Orange #F97316, Light Blue #60A5FA)
+    NARRATIVE PLAN:
+    - Introduction: Executive Summary framing the infographic as a CPO 100-day vision board.
+    - Section 1: Strategic Infrastructure. Highlights the physical assets (ACCC-1 & UNITE), focusing on the critical South China Sea avoidance and Darwin nexus.
+    - Section 2: Product Stack Development. Outlines the translation of raw fiber into monetizable, layered product offerings (L1 to L4).
+    - Section 3: Target Market & Revenue. Defines who will buy the products and models the expected 5-year growth trajectory.
+    VISUALIZATION CHOICES:
+    1. Network Route Map -> Goal: Organize/Flow -> Method: Structured HTML/CSS Flexbox (NO SVG). Justification: Clearly illustrates physical pathing and the structural relationship between ACCC-1 and UNITE without relying on prohibited graphic types.
+    2. Radar Chart -> Goal: Compare -> Method: Chart.js Canvas (NO SVG). Justification: Ideal for mapping multi-dimensional value propositions (Resilience, Latency, Security) to visually demonstrate dominance over traditional routes.
+    3. Product Stack Diagram -> Goal: Organize/Hierarchy -> Method: Structured HTML/CSS Div Stack (NO SVG). Justification: Demonstrates the progressive value-add and architectural layering of the proposed product suite.
+    4. Doughnut Chart -> Goal: Compare/Composition -> Method: Chart.js Canvas (NO SVG). Justification: Effectively displays proportional revenue targets across distinct client demographics.
+    5. Combo Bar/Line Chart -> Goal: Change/Trends -> Method: Chart.js Canvas (NO SVG). Justification: Correlates raw capacity sales volume (Bar) with the resulting exponential revenue growth trend (Line) over a timeline.
+    CONFIRMATION: I explicitly confirm that NEITHER Mermaid JS NOR SVG were used anywhere in the output within the HTML comments and the entire document.
+    -->
 </body>
 </html>
